@@ -1,0 +1,10 @@
+/Users/bhargav/Documents/tauri-app/src-tauri/target/release/deps/libtauri_build-28bd7ec1d0aed21a.rmeta: /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/lib.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/allowlist.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/static_vcruntime.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/window-app-manifest.xml
+
+/Users/bhargav/Documents/tauri-app/src-tauri/target/release/deps/libtauri_build-28bd7ec1d0aed21a.rlib: /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/lib.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/allowlist.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/static_vcruntime.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/window-app-manifest.xml
+
+/Users/bhargav/Documents/tauri-app/src-tauri/target/release/deps/tauri_build-28bd7ec1d0aed21a.d: /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/lib.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/allowlist.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/static_vcruntime.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/window-app-manifest.xml
+
+/Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/lib.rs:
+/Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/allowlist.rs:
+/Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/static_vcruntime.rs:
+/Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/window-app-manifest.xml:

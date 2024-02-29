@@ -1,0 +1,10 @@
+/Users/bhargav/Documents/Tauri project/tauri-app/src-tauri/target/debug/deps/libtauri_build-7d4b5feafb124db1.rmeta: /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/lib.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/allowlist.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/static_vcruntime.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/window-app-manifest.xml
+
+/Users/bhargav/Documents/Tauri project/tauri-app/src-tauri/target/debug/deps/libtauri_build-7d4b5feafb124db1.rlib: /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/lib.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/allowlist.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/static_vcruntime.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/window-app-manifest.xml
+
+/Users/bhargav/Documents/Tauri project/tauri-app/src-tauri/target/debug/deps/tauri_build-7d4b5feafb124db1.d: /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/lib.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/allowlist.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/static_vcruntime.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/window-app-manifest.xml
+
+/Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/lib.rs:
+/Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/allowlist.rs:
+/Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/static_vcruntime.rs:
+/Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-build-1.5.0/src/window-app-manifest.xml:

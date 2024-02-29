@@ -1,0 +1,10 @@
+/Users/bhargav/Documents/tauri-app/src-tauri/target/debug/deps/libtauri_runtime_wry-eae74270a2807da7.rmeta: /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-runtime-wry-0.14.2/src/lib.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-runtime-wry-0.14.2/src/webview.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-runtime-wry-0.14.2/src/global_shortcut.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-runtime-wry-0.14.2/src/clipboard.rs
+
+/Users/bhargav/Documents/tauri-app/src-tauri/target/debug/deps/libtauri_runtime_wry-eae74270a2807da7.rlib: /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-runtime-wry-0.14.2/src/lib.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-runtime-wry-0.14.2/src/webview.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-runtime-wry-0.14.2/src/global_shortcut.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-runtime-wry-0.14.2/src/clipboard.rs
+
+/Users/bhargav/Documents/tauri-app/src-tauri/target/debug/deps/tauri_runtime_wry-eae74270a2807da7.d: /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-runtime-wry-0.14.2/src/lib.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-runtime-wry-0.14.2/src/webview.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-runtime-wry-0.14.2/src/global_shortcut.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-runtime-wry-0.14.2/src/clipboard.rs
+
+/Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-runtime-wry-0.14.2/src/lib.rs:
+/Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-runtime-wry-0.14.2/src/webview.rs:
+/Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-runtime-wry-0.14.2/src/global_shortcut.rs:
+/Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tauri-runtime-wry-0.14.2/src/clipboard.rs:

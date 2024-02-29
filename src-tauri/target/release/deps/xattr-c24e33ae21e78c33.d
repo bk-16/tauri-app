@@ -1,0 +1,11 @@
+/Users/bhargav/Documents/Tauri project/tauri-app/src-tauri/target/release/deps/libxattr-c24e33ae21e78c33.rmeta: /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xattr-1.1.3/src/lib.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xattr-1.1.3/src/error.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xattr-1.1.3/src/sys/mod.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xattr-1.1.3/src/util.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xattr-1.1.3/src/sys/linux_macos.rs
+
+/Users/bhargav/Documents/Tauri project/tauri-app/src-tauri/target/release/deps/libxattr-c24e33ae21e78c33.rlib: /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xattr-1.1.3/src/lib.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xattr-1.1.3/src/error.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xattr-1.1.3/src/sys/mod.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xattr-1.1.3/src/util.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xattr-1.1.3/src/sys/linux_macos.rs
+
+/Users/bhargav/Documents/Tauri project/tauri-app/src-tauri/target/release/deps/xattr-c24e33ae21e78c33.d: /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xattr-1.1.3/src/lib.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xattr-1.1.3/src/error.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xattr-1.1.3/src/sys/mod.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xattr-1.1.3/src/util.rs /Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xattr-1.1.3/src/sys/linux_macos.rs
+
+/Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xattr-1.1.3/src/lib.rs:
+/Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xattr-1.1.3/src/error.rs:
+/Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xattr-1.1.3/src/sys/mod.rs:
+/Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xattr-1.1.3/src/util.rs:
+/Users/bhargav/.cargo/registry/src/index.crates.io-6f17d22bba15001f/xattr-1.1.3/src/sys/linux_macos.rs:
