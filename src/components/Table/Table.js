@@ -37,7 +37,13 @@ const Table = ({selectedRenderJobs, handleRenderJobsCompleted}) => {
                                         Output Path
                                     </th>
                                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Source Path
+                                        Job Path
+                                    </th>
+                                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Octane Path
+                                    </th>
+                                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Output Directory
                                     </th>
                                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Updated On
@@ -61,7 +67,9 @@ const Table = ({selectedRenderJobs, handleRenderJobsCompleted}) => {
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.fields?.SKU}</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.fields?.Assets_Path}</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.fields?.Output_Path}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.fields?.Source_Path}</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.fields?.Job_Path}</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.fields?.Octane_Path}</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.fields?.Output_Dir}</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.fields?.Updated_On}</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.fields?.Created_On}</td>
                                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
