@@ -17,6 +17,7 @@ import Airtable from 'airtable';
 import Table from "../Table/Table";
 import {newSocket} from "../../socket";
 import {appLocalDataDir, documentDir, appDataDir, dirname, path } from "@tauri-apps/api/path";
+import { invoke } from '@tauri-apps/api/tauri'
 
 Airtable.configure({
     apiKey: `${process.env.REACT_APP_AIRTABLE_API_KEY}`
@@ -53,6 +54,8 @@ const Sidebar = () => {
     const [renderJobs, setRenderJobs] = useState([]);
     const [selectedRenderJobs, setSelectedRenderJobs] = useState([]);
     const [connectedClients, setConnectedClients] = useState([]);
+    const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const { id } = useParams();
     const content = id ? id.charAt(0).toUpperCase() + id.substring(1) : 'Home page';
 
@@ -212,10 +215,19 @@ const Sidebar = () => {
                 }
                 records.forEach(function(record) {
                     console.log('Status=>', record.get('Status'));
+                    if (record.get('Status') === 'Completed' )
+                    {
+                        setTimeout(()=> {
+                            setIsShow(true);
+                        }, 3000)
+                    }
 
                 });
             });
 
+        const {Job_Path, Assets_Path, Output_Path, Output_Dir, Octane_Path} = selectedRenderJobs[0]?.fields;
+        console.log('abc', Job_Path)
+        callRunOctaneRender(Job_Path, Assets_Path, Output_Path, Output_Dir, Octane_Path);
 
       //  console.log('handleRenderJobsCompleted', nodeId);
     }
@@ -254,10 +266,6 @@ const Sidebar = () => {
                     if (record.get('Status') === 'Connected' )
                     {
                         appWindow.setTitle(selectedNode);
-
-                        setTimeout(()=> {
-                            setIsShow(true);
-                        }, 2000)
                     }
 
                 });
@@ -267,6 +275,27 @@ const Sidebar = () => {
      }
 
     console.log('selectedRenderJobs==>', selectedRenderJobs);
+
+    const callRunOctaneRender = async(Job_Path, Assets_Path, Output_Path, Output_Dir, Octane_Path) => {
+        console.log('def', Job_Path)
+        try {
+            await invoke('run_octane_render', {
+                job_path: Job_Path,
+                assets_path: Assets_Path,
+                output_path: Output_Path,
+                output_dir: Output_Dir,
+                octane_path: Octane_Path,
+            });
+            console.log('Render command executed successfully');
+            setSuccessMessage('Render command executed successfully');
+        } catch (error) {
+            console.error('Failed to execute render command:', error);
+            setErrorMessage(error);
+        }
+
+    }
+
+
 
     return (
         <>
@@ -568,7 +597,7 @@ const Sidebar = () => {
 
                     {
                         isShow ? (
-                                <Form content={content} connectedClients={connectedClients} />
+                                <Form content={content} connectedClients={connectedClients} successMessage={successMessage} errorMessage={errorMessage} />
                             )
                             :(
                                 <>

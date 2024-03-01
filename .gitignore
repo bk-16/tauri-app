@@ -28,7 +28,7 @@ logs
 Thumbs.db
 
 # Environment variables file
-.env
+#.env
 
 # Build directory
 /build/

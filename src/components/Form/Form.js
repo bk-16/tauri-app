@@ -9,7 +9,7 @@ const classNames = (...classes) => {
     return classes.filter(Boolean).join(" ");
 }
 
-const Form = ({content, connectedClients}) => {
+const Form = ({content, connectedClients, successMessage, errorMessage}) => {
     console.log('connectedClients=>', connectedClients);
 /*    const [connectedClients, setConnectedClients] = useState([]);*/
     const [selected, setSelected] = useState("");
@@ -240,6 +240,15 @@ const Form = ({content, connectedClients}) => {
             {newJob && <p className='my-2'>
                 {newJob}
             </p>}
+
+          {successMessage && <p className='my-2'>
+                         {successMessage}
+          </p>}
+
+           {errorMessage && <p className='my-2'>
+                         {errorMessage}
+          </p>}
+
 
          {/*   {connectionLog && <p className='my-2'>
                     {`Client id status:--> [ ${connectionLog} ]`}
