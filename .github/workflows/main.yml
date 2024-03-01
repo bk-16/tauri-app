@@ -25,7 +25,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev libayatana-appindicator3-dev librsvg2-dev
-          
+
       - name: Rust setup
         uses: dtolnay/rust-toolchain@stable
 
@@ -47,23 +47,11 @@ jobs:
       - name: Build the app
         uses: tauri-apps/tauri-action@v0
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v1.0.0
-          release_name: Release v1.0.0
-          draft: false
+          tagName: ${{ github.ref_name }} # This only works if your workflow triggers on new tags.
+          releaseName: 'App Name v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
+          releaseBody: 'See the assets to download and install this version.'
+          releaseDraft: true
           prerelease: false
-
-      - name: Upload release assets
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_name: tauri-web_0.0.0_amd64.exe
-          asset_path: /home/runner/work/command-renderer/command-renderer/src-tauri/target/release/bundle/deb/tauri-web_0.0.0_amd64.exe
-          asset_content_type: application/octet-stream
