@@ -46,7 +46,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "command app",
+      "identifier": "command-app-0.",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
