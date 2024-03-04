@@ -47,13 +47,7 @@ fn run_octane_render(job_path: String, assets_path: String, output_path: String,
         //     .arg("--octanePath")
         //     .arg(octane_paths)
         //     .output();
-            let output = std::process::Command::new("powershell")
-            .arg(job_paths)
-            .arg(assets_paths)
-            .arg(output_paths)
-            .arg(output_dirs)
-            .arg(octane_paths)
-            .output();
+            let output = std::process::Command::new("powershell").args([job_paths, assets_paths, output_paths, output_dirs, octane_paths]).output();
           
 
     match output {
