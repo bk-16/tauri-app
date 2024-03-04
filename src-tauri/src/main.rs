@@ -17,7 +17,7 @@ fn run_octane_render(job_path: String, assets_path: String, output_path: String,
 
        let job_paths = "I:\\RB001\\PKRCLP\\EMR\\050\\CNL";
        let assets_paths = "S:\\Assets";
-       let output_paths ="o:\\images RB001-PKRCLIP-EMR-050-CNL";
+       let output_paths ="o:\\images";
        let output_dirs = "RB001-PKRCLIP-EMR-050-CNL";
        let octane_paths = "S:\\Octane";
 
