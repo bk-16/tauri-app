@@ -33,17 +33,17 @@ fn run_octane_render(job_path: String, assets_path: String, output_path: String,
 //         ])
 //         .output();
         let output = std::process::Command::new("powershell")
-            .arg("-File")
+            .arg("--File")
             .arg(script_path)
-            .arg("-jobPath")
+            .arg("--jobPath")
             .arg(job_paths)
-            .arg("-assetsPath")
+            .arg("--assetsPath")
             .arg(assets_paths)
-            .arg("-outputPath")
+            .arg("--outputPath")
             .arg(output_paths)
-            .arg("-outputDir")
+            .arg("--outputDir")
             .arg(output_dirs)
-            .arg("-octanePath")
+            .arg("--octanePath")
             .arg(octane_paths)
             .output();
 
