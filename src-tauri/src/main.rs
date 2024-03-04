@@ -15,11 +15,11 @@ fn run_octane_render(job_path: String, assets_path: String, output_path: String,
 
      println!("job_path: {}", job_path);
 
-       let job_paths = "C:\\Users\\Jeet\\Documents\\RB001\\PKRCLP\\EMR\\050\\CNL\\";
-       let assets_paths = "C:\\RenderFarm\\assets";
-       let output_paths ="C:\\RenderFarm\\output\\images";
-       let output_dirs = "A-B-C";
-       let octane_paths = "D:\\RenderFarm\\octane";
+       let job_paths = "I:\RB001\PKRCLP\EMR\050\CNL";
+       let assets_paths = "S:\Assets";
+       let output_paths ="o:\images RB001-PKRCLIP-EMR-050-CNL";
+       let output_dirs = "RB001-PKRCLIP-EMR-050-CNL";
+       let octane_paths = "S:\Octane";
 
     // Construct the command to execute the PowerShell script
 //     let output = std::process::Command::new("powershell")
@@ -32,20 +32,29 @@ fn run_octane_render(job_path: String, assets_path: String, output_path: String,
 //             "-octanePath", octane_paths,
 //         ])
 //         .output();
-        let output = std::process::Command::new("powershell")
-            .arg("--File")
-            .arg(script_path)
-            .arg("--jobPath")
+
+        // let output = std::process::Command::new("powershell")
+        //     .arg("--File")
+        //     .arg(script_path)
+        //     .arg("--jobPath")
+        //     .arg(job_paths)
+        //     .arg("--assetsPath")
+        //     .arg(assets_paths)
+        //     .arg("--outputPath")
+        //     .arg(output_paths)
+        //     .arg("--outputDir")
+        //     .arg(output_dirs)
+        //     .arg("--octanePath")
+        //     .arg(octane_paths)
+        //     .output();
+            let output = std::process::Command::new("powershell")
             .arg(job_paths)
-            .arg("--assetsPath")
             .arg(assets_paths)
-            .arg("--outputPath")
             .arg(output_paths)
-            .arg("--outputDir")
             .arg(output_dirs)
-            .arg("--octanePath")
             .arg(octane_paths)
             .output();
+          
 
     match output {
         Ok(output) => {
