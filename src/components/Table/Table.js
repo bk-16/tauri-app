@@ -2,8 +2,8 @@ const people = [
     { name: 'Lindsay Walton', title: 'Front-end Developer', email: 'lindsay.walton@example.com', role: 'Member' },
 ]
 
-const Table = ({selectedRenderJobs, handleRenderJobsCompleted}) => {
-    console.log('selectedRenderJobsTable=>', selectedRenderJobs);
+const Table = ({renderJobsData, handleRenderJobsCompleted}) => {
+    console.log('renderJobsData=>', renderJobsData);
     return (
         <div className="px-4 sm:px-6 lg:px-8">
             <div className="sm:flex sm:items-center">
@@ -57,23 +57,23 @@ const Table = ({selectedRenderJobs, handleRenderJobsCompleted}) => {
                                 </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200 bg-white">
-                                {selectedRenderJobs.map((data, index) => (
+                                {renderJobsData.map((data, index) => (
                                     <tr key={index}>
                                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                            {data?.fields?.JobID}
+                                            {data?.id}
                                         </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.fields?.Status}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.fields?.Render_Node}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.fields?.SKU}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.fields?.Assets_Path}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.fields?.Output_Path}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.fields?.Job_Path}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.fields?.Octane_Path}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.fields?.Output_Dir}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.fields?.Updated_On}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.fields?.Created_On}</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.status}</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.render_node}</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.sku}</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.assets_path}</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.output_path}</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.job_path}</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.octane_path}</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.output_dir}</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.date_updated}</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{data?.date_created}</td>
                                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                            <a href="#" className="text-indigo-600 hover:text-indigo-900"   onClick={() => handleRenderJobsCompleted(data?.fields?.Render_Node)}>
+                                            <a href="#" className="text-indigo-600 hover:text-indigo-900" onClick={() => handleRenderJobsCompleted()}>
                                                 Complete
                                             </a>
                                          {/*   <button

@@ -9,7 +9,7 @@ const classNames = (...classes) => {
     return classes.filter(Boolean).join(" ");
 }
 
-const Form = ({content, connectedClients, successMessage, errorMessage}) => {
+const Form = ({content, connectedClients, successMessage, errorMessage, setIsShow}) => {
     console.log('connectedClients=>', connectedClients);
 /*    const [connectedClients, setConnectedClients] = useState([]);*/
     const [selected, setSelected] = useState("");
@@ -76,6 +76,9 @@ const Form = ({content, connectedClients, successMessage, errorMessage}) => {
         }
     }
 
+    const handleBack = () => {
+        setIsShow(false);
+    }
 
     useEffect(() => {
 
@@ -201,6 +204,13 @@ const Form = ({content, connectedClients, successMessage, errorMessage}) => {
                             >
                                 Send
                             </button>
+                            <button
+                                onClick={handleBack}
+                                className="!mt-7 inline-flex w-full items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:ml-3 sm:mt-0 sm:w-auto"
+                            >
+                                Back
+                            </button>
+
 
                         </div>
                     </div>

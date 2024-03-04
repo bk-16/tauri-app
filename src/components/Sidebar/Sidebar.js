@@ -1,6 +1,6 @@
-import {Fragment, useEffect, useState} from 'react'
-import {Dialog, Listbox, Menu, Transition} from '@headlessui/react'
-import {Link, useParams} from "react-router-dom";
+import { Fragment, useEffect, useState } from 'react'
+import { Dialog, Listbox, Menu, Transition } from '@headlessui/react'
+import { Link, useParams } from "react-router-dom";
 import {
     Bars3Icon,
     BellIcon,
@@ -10,14 +10,15 @@ import {
     UsersIcon,
     XMarkIcon,
 } from '@heroicons/react/24/outline'
-import {CheckIcon, ChevronDownIcon, ChevronUpDownIcon, MagnifyingGlassIcon} from '@heroicons/react/20/solid'
+import { CheckIcon, ChevronDownIcon, ChevronUpDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Form from "../Form/Form";
-import {appWindow} from "@tauri-apps/api/window";
+import { appWindow } from "@tauri-apps/api/window";
 import Airtable from 'airtable';
 import Table from "../Table/Table";
-import {newSocket} from "../../socket";
-import {appLocalDataDir, documentDir, appDataDir, dirname, path } from "@tauri-apps/api/path";
+import { newSocket } from "../../socket";
+import { appLocalDataDir, documentDir, appDataDir, dirname, path } from "@tauri-apps/api/path";
 import { invoke } from '@tauri-apps/api/tauri'
+import { createDirectus, readItems, rest, staticToken, withOptions, refresh } from '@directus/sdk';
 
 Airtable.configure({
     apiKey: `${process.env.REACT_APP_AIRTABLE_API_KEY}`
@@ -50,14 +51,66 @@ const Sidebar = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [isShow, setIsShow] = useState(false);
     const [disconnectedNodes, setDisconnectedNodes] = useState([]);
+    const [disconnected, setDisconnected] = useState([]);
     const [selectedNode, setSelectedNode] = useState("");
     const [renderJobs, setRenderJobs] = useState([]);
+    const [renderJobsData, setRenderJobsData] = useState([]);
+
     const [selectedRenderJobs, setSelectedRenderJobs] = useState([]);
     const [connectedClients, setConnectedClients] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const { id } = useParams();
     const content = id ? id.charAt(0).toUpperCase() + id.substring(1) : 'Home page';
+
+    //     const client = createDirectus('http://localhost:8055/').with(staticToken('qmT4Gu0ok2irschFc5vh9QZs3RpyNL60')).with(rest({credentials:'include'}));
+    const client = createDirectus('http://localhost:8055/')
+        .with(staticToken('0AJzuH56xvfEl2lXCt0uu7Tz0aCmfY3y'))
+        .with(rest());
+
+    /*    const client = createDirectus('http://localhost:8055/').with(rest());*/
+
+    /*  const fetchData = async() => {
+          fetch('http://localhost:8055/items/render_nodes',
+              {
+                  method: 'GET',
+                  headers: {
+                      'Authorization': `Bearer qmT4Gu0ok2irschFc5vh9QZs3RpyNL60`,
+                      'Content-Type': 'application/json',
+                      'Access-Control-Allow-Origin': '*',
+                      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+                      'Access-Control-Allow-Headers': 'Content-Type',
+                  },
+              })
+              .then(response => {
+                  if (!response.ok) {
+                      throw new Error('Network response was not ok');
+                  }
+                  return response.json();
+              })
+              .then(data => {
+                  console.log('directusData', data);
+              })
+              .catch(error => {
+                  console.error('Fetch error:', error);
+              });
+       // return await client.request(readItems('Rings'));
+      }*/
+
+    const fetchData = async () => {
+        const data = await client.request(
+            readItems("render_nodes", {
+                filter: {
+                    status: {
+                        _eq: 'disconnected'
+                    }
+                }
+            }
+            ));
+
+        setDisconnected(data);
+        console.log('directsdata', data)
+    }
 
     const getRenderNodesData = () => {
 
@@ -116,29 +169,32 @@ const Sidebar = () => {
               if (err) { console.error(err); return; }
           });*/
 
-      /*  fetch('https://api.airtable.com/v0/appduO4uHSNPZ4Ipa/Render Nodes',
-            {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`
-                }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
+        /*  fetch('https://api.airtable.com/v0/appduO4uHSNPZ4Ipa/Render Nodes',
+              {
+                  method: 'GET',
+                  headers: {
+                      'Authorization': `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`
+                  }
+              })
+              .then(response => {
+                  if (!response.ok) {
+                      throw new Error('Network response was not ok');
+                  }
+                  return response.json();
+              })
+              .then(data => {
+  
+                  const disconnected = data?.records?.filter((data) => data?.fields?.Status === "Disconnected");
+                  setDisconnectedNodes(disconnected);
+              })
+              .catch(error => {
+                  console.error('Fetch error:', error);
+              });*/
 
-                const disconnected = data?.records?.filter((data) => data?.fields?.Status === "Disconnected");
-                setDisconnectedNodes(disconnected);
-            })
-            .catch(error => {
-                console.error('Fetch error:', error);
-            });*/
+        fetchData();
+        //  getRenderNodesData();
 
-        getRenderNodesData();
+/*
 
         fetch('https://api.airtable.com/v0/appduO4uHSNPZ4Ipa/RenderJobs',
             {
@@ -159,6 +215,7 @@ const Sidebar = () => {
             .catch(error => {
                 console.error('Fetch error:', error);
             });
+*/
 
 
         newSocket.on("connectedClients", (data) => {
@@ -167,35 +224,35 @@ const Sidebar = () => {
             setConnectedClients(data);
         });
 
-    });
+
+
+    }, []);
 
     console.log('disconnectedNodes=>', disconnectedNodes);
     console.log('selectedNode=>', selectedNode);
     console.log('renderJobs=>', renderJobs);
 
-    const handleRenderJobsCompleted = async(renderNode) => {
+    const handleRenderJobsCompleted = async () => {
 
 
-             console.log('selectedRenderJobsIn=>', selectedRenderJobs);
+        console.log('selectedRenderJobsIn=>', selectedRenderJobs);
 
 
+        /*  const dataDirPath = path.join(documentDir,'/Users/bhargav/Documents/test');
+  
+          const exists = await path.exists(dataDirPath);
+  
+          if (exists) {
+              console.log('Data directory found:', dataDirPath);
+              // Use the directory path for further operations (e.g., reading or writing files)
+          } else {
+              console.log('Data directory not found.');
+          }
+  
+  
+  */
 
-
-      /*  const dataDirPath = path.join(documentDir,'/Users/bhargav/Documents/test');
-
-        const exists = await path.exists(dataDirPath);
-
-        if (exists) {
-            console.log('Data directory found:', dataDirPath);
-            // Use the directory path for further operations (e.g., reading or writing files)
-        } else {
-            console.log('Data directory not found.');
-        }
-
-
-*/
-
-
+/*
         selectedRenderJobs.forEach(data => {
             data.fields.Status = "Completed"
         });
@@ -208,35 +265,55 @@ const Sidebar = () => {
         console.log('selectedRenderJobsAfter=>', selectedRenderJobs);
         base('RenderJobs').update(
             filteredRecords
-            , function(err, records) {
+            , function (err, records) {
                 if (err) {
                     console.error(err);
                     return;
                 }
-                records.forEach(function(record) {
+                records.forEach(function (record) {
                     console.log('Status=>', record.get('Status'));
-                    if (record.get('Status') === 'Completed' )
-                    {
-                        setTimeout(()=> {
+                    if (record.get('Status') === 'Completed') {
+                        setTimeout(() => {
                             setIsShow(true);
                         }, 3000)
                     }
 
                 });
-            });
+            });*/
 
-        const {Job_Path, Assets_Path, Output_Path, Output_Dir, Octane_Path} = selectedRenderJobs[0]?.fields;
-        console.log('abc', Job_Path)
-        callRunOctaneRender(Job_Path, Assets_Path, Output_Path, Output_Dir, Octane_Path);
+        const { job_path, assets_path, output_path, output_dir, octane_path } = renderJobsData[0];
+        console.log('abc', job_path)
+        callRunOctaneRender(job_path, assets_path, output_path, output_dir, octane_path);
 
-      //  console.log('handleRenderJobsCompleted', nodeId);
+
+            setIsShow(true);
+
+
+
+
+        //  console.log('handleRenderJobsCompleted', nodeId);
     }
 
-    const setNodeConnected = () => {
+    const setNodeConnected = async() => {
+        console.log('selectedNode++', selectedNode)
+        const renderNodeId = disconnected.filter((node) => node?.name === selectedNode)[0]?.id;
+        console.log('renderNodeId', renderNodeId)
+
+        const renderJobsdata = await client.request(
+            readItems("render_jobs", {
+                    filter: {
+                        render_node: {
+                            _eq: renderNodeId
+                        }
+                    }
+                }
+            ));
+
+        setRenderJobsData(renderJobsdata);
         getRenderNodesData();
         const selectedNodeData = disconnectedNodes.filter(item => item?.fields?.Name === selectedNode);
-    //    setNodeId(selectedNodeData[0]?.fields?.Node_ID);
-    //    console.log('selectedNodeData=>', );
+        //    setNodeId(selectedNodeData[0]?.fields?.Node_ID);
+        //    console.log('selectedNodeData=>', );
         disconnectedNodes.forEach(data => {
             data.fields.Status = "Connected"
         });
@@ -256,15 +333,14 @@ const Sidebar = () => {
 
         base('Render Nodes').update(
             filteredRecords
-            , function(err, records) {
+            , function (err, records) {
                 if (err) {
                     console.error(err);
                     return;
                 }
-                records.forEach(function(record) {
+                records.forEach(function (record) {
                     console.log('Status=>', record.get('Status'));
-                    if (record.get('Status') === 'Connected' )
-                    {
+                    if (record.get('Status') === 'Connected') {
                         appWindow.setTitle(selectedNode);
                     }
 
@@ -272,11 +348,11 @@ const Sidebar = () => {
             });
 
 
-     }
+    }
 
     console.log('selectedRenderJobs==>', selectedRenderJobs);
 
-    const callRunOctaneRender = async(Job_Path, Assets_Path, Output_Path, Output_Dir, Octane_Path) => {
+    const callRunOctaneRender = async (Job_Path, Assets_Path, Output_Path, Output_Dir, Octane_Path) => {
         console.log('def', Job_Path)
         try {
             await invoke('run_octane_render', {
@@ -295,6 +371,10 @@ const Sidebar = () => {
 
     }
 
+    console.log('disconnected', disconnected)
+
+    console.log('selectedNode==>', selectedNode)
+    console.log('renderJobsData==>', renderJobsData)
 
 
     return (
@@ -392,9 +472,9 @@ const Sidebar = () => {
                                                                         'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                                                                     )}
                                                                 >
-                                                                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-indigo-400 bg-indigo-500 text-[0.625rem] font-medium text-white">
-                                                                    {team.initial}
-                                                                  </span>
+                                                                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-indigo-400 bg-indigo-500 text-[0.625rem] font-medium text-white">
+                                                                        {team.initial}
+                                                                    </span>
                                                                     <span className="truncate">{team.name}</span>
                                                                 </a>
                                                             </li>
@@ -439,7 +519,7 @@ const Sidebar = () => {
                                 <li>
                                     <ul role="list" className="-mx-2 space-y-1">
                                         {navigation.map((item, index) => (
-                                            <Link to={`/${item.href}`} key={index}  className={classNames(
+                                            <Link to={`/${item.href}`} key={index} className={classNames(
                                                 item.current
                                                     ? 'bg-indigo-700 text-white'
                                                     : 'text-indigo-200 hover:text-white hover:bg-indigo-700',
@@ -462,9 +542,9 @@ const Sidebar = () => {
                                                         'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                                                     )}
                                                 >
-                                                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-indigo-400 bg-indigo-500 text-[0.625rem] font-medium text-white">
-                                                    {team.initial}
-                                                  </span>
+                                                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-indigo-400 bg-indigo-500 text-[0.625rem] font-medium text-white">
+                                                        {team.initial}
+                                                    </span>
                                                     <span className="truncate">{team.name}</span>
                                                 </a>
                                             </li>
@@ -534,10 +614,10 @@ const Sidebar = () => {
                                             alt=""
                                         />
                                         <span className="hidden lg:flex lg:items-center">
-                                          <span className="ml-4 text-sm font-semibold leading-6 text-gray-900" aria-hidden="true">
-                                            Tom Cook
-                                          </span>
-                                          <ChevronDownIcon className="ml-2 h-5 w-5 text-gray-400" aria-hidden="true" />
+                                            <span className="ml-4 text-sm font-semibold leading-6 text-gray-900" aria-hidden="true">
+                                                Tom Cook
+                                            </span>
+                                            <ChevronDownIcon className="ml-2 h-5 w-5 text-gray-400" aria-hidden="true" />
                                         </span>
                                     </Menu.Button>
                                     <Transition
@@ -572,7 +652,7 @@ const Sidebar = () => {
                         </div>
                     </div>
 
-             {/*       <main className="py-10">
+                    {/*       <main className="py-10">
                         <div className="px-auto py-auto sm:px-6 lg:px-8">
                             <div className="mt-5 sm:flex sm:items-center">
                                 <div className="w-full sm:max-w-xs">
@@ -597,18 +677,18 @@ const Sidebar = () => {
 
                     {
                         isShow ? (
-                                <Form content={content} connectedClients={connectedClients} successMessage={successMessage} errorMessage={errorMessage} />
-                            )
-                            :(
+                            <Form content={content} connectedClients={connectedClients} successMessage={successMessage} errorMessage={errorMessage} setIsShow={setIsShow} />
+                        )
+                            : (
                                 <>
                                     <main className="py-10">
                                         <div className="px-4 sm:px-6 lg:px-8">
-                                            <div className="bg-whit mt-5 shadow sm:rounded-lg max-w-[800px]" style={{border:'1px solid gray'}}>
+                                            <div className="bg-whit mt-5 shadow sm:rounded-lg max-w-[800px]" style={{ border: '1px solid gray' }}>
                                                 <div className="px-4 py-5 sm:p-6">
                                                     <div className="mt-5 sm:flex sm:items-center">
                                                         <div className="w-full sm:max-w-xs">
                                                             <Listbox value={selectedNode} onChange={setSelectedNode}>
-                                                                {({open}) => (
+                                                                {({ open }) => (
                                                                     <>
                                                                         <Listbox.Label>
                                                                             Nodes list
@@ -616,16 +696,16 @@ const Sidebar = () => {
                                                                         <div className="relative mt-2 max-w-[320px]">
                                                                             <Listbox.Button
                                                                                 className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                  <span className="block truncate">
-                                    {selectedNode ? selectedNode : "Select node"}
-                                  </span>
+                                                                                <span className="block truncate">
+                                                                                    {selectedNode ? selectedNode : "Select node"}
+                                                                                </span>
                                                                                 <span
                                                                                     className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                                    <ChevronUpDownIcon
-                                        className="h-5 w-5 text-gray-400"
-                                        aria-hidden="true"
-                                    />
-                                  </span>
+                                                                                    <ChevronUpDownIcon
+                                                                                        className="h-5 w-5 text-gray-400"
+                                                                                        aria-hidden="true"
+                                                                                    />
+                                                                                </span>
                                                                             </Listbox.Button>
 
                                                                             <Transition
@@ -637,10 +717,10 @@ const Sidebar = () => {
                                                                             >
                                                                                 <Listbox.Options
                                                                                     className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                                                                    {disconnectedNodes.map((nodes, index) => (
+                                                                                    {disconnected.map((nodes, index) => (
                                                                                         <Listbox.Option
-                                                                                            key={index}
-                                                                                            className={({active}) =>
+                                                                                            key={nodes.id}
+                                                                                            className={({ active }) =>
                                                                                                 classNames(
                                                                                                     active
                                                                                                         ? "bg-indigo-600 text-white"
@@ -648,29 +728,29 @@ const Sidebar = () => {
                                                                                                     "relative cursor-default select-none py-2 pl-3 pr-9"
                                                                                                 )
                                                                                             }
-                                                                                            value={nodes?.fields?.Name}
+                                                                                            value={nodes?.name}
                                                                                         >
-                                                                                            {({selected, active}) => (
+                                                                                            {({ selected, active }) => (
                                                                                                 <>
-                                                <span
-                                                    className={classNames(
-                                                        selected ? "font-semibold" : "font-normal",
-                                                        "block truncate"
-                                                    )}
-                                                >
-                                                  {nodes?.fields?.Name}
-                                                </span>
+                                                                                                    <span
+                                                                                                        className={classNames(
+                                                                                                            selected ? "font-semibold" : "font-normal",
+                                                                                                            "block truncate"
+                                                                                                        )}
+                                                                                                    >
+                                                                                                        {nodes?.name}
+                                                                                                    </span>
                                                                                                     {selected ? (
                                                                                                         <span
                                                                                                             className={classNames(
                                                                                                                 active ? "text-white" : "text-indigo-600",
                                                                                                                 "absolute inset-y-0 right-0 flex items-center pr-4"
                                                                                                             )}>
-                                                <CheckIcon
-                                                    className="h-5 w-5"
-                                                    aria-hidden="true"
-                                                />
-                                              </span>
+                                                                                                            <CheckIcon
+                                                                                                                className="h-5 w-5"
+                                                                                                                aria-hidden="true"
+                                                                                                            />
+                                                                                                        </span>
                                                                                                     ) : null}
                                                                                                 </>
                                                                                             )}
@@ -695,7 +775,7 @@ const Sidebar = () => {
 
                                         </div>
                                     </main>
-                                    <Table selectedRenderJobs={selectedRenderJobs} handleRenderJobsCompleted={handleRenderJobsCompleted} />
+                                    <Table renderJobsData={renderJobsData} handleRenderJobsCompleted={handleRenderJobsCompleted} />
                                 </>
                             )
                     }
