@@ -11,7 +11,7 @@ fn main() {
 
 #[tauri::command]
 fn run_octane_render(job_path: String, assets_path: String, output_path: String, output_dir: String, octane_path: String) -> Result<(), String> {
-    let script_path = "/Users/bhargav/Documents/Tauri project/win-tauri-app/src/RunOctaneRender.ps1";
+    let script_path = "src/RunOctaneRender.ps1";
 
     // Construct the command to execute the PowerShell script
     let output = std::process::Command::new("powershell")
